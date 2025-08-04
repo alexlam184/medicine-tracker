@@ -183,56 +183,71 @@ export default function App() {
         >
           <h2 className="text-xl font-semibold mb-3">Create New Medicine</h2>
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <select
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="p-2 border rounded"
-              required
-            >
-              <option value="">Select Medicine Name</option>
-              {medicineNames.map((n) => (
-                <option key={n}>{n}</option>
-              ))}
-            </select>
-            <input
-              type="text"
-              placeholder="Batch Number"
-              value={form.batch}
-              onChange={(e) => setForm({ ...form, batch: e.target.value })}
-              className="p-2 border rounded"
-              required
-            />
-            <select
-              value={form.brand}
-              onChange={(e) => setForm({ ...form, brand: e.target.value })}
-              className="p-2 border rounded"
-              required
-            >
-              <option value="">Select brand</option>
-              {brands.map((n) => (
-                <option key={n}>{n}</option>
-              ))}
-            </select>
-            <select
-              value={form.factory}
-              onChange={(e) => setForm({ ...form, factory: e.target.value })}
-              className="p-2 border rounded"
-              required
-            >
-              <option value="">Select Manufacture Factory</option>
-              {factories.map((n) => (
-                <option key={n}>{n}</option>
-              ))}
-            </select>
-            <input
-              type="date"
-              value={form.productionDate}
-              onChange={(e) =>
-                setForm({ ...form, productionDate: e.target.value })
-              }
-              className="p-2 border rounded col-span-2"
-              required
-            />
+            <div>
+              <span>Medicine Name : </span>
+              <select
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                className="p-2 border rounded"
+                required
+              >
+                <option value="">Select Medicine Name</option>
+                {medicineNames.map((n) => (
+                  <option key={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <span>Brand Name : </span>
+              <select
+                value={form.brand}
+                onChange={(e) => setForm({ ...form, brand: e.target.value })}
+                className="p-2 border rounded"
+                required
+              >
+                <option value="">Select brand</option>
+                {brands.map((n) => (
+                  <option key={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <span>Factory : </span>
+              <select
+                value={form.factory}
+                onChange={(e) => setForm({ ...form, factory: e.target.value })}
+                className="p-2 border rounded"
+                required
+              >
+                <option value="">Select Manufacture Factory</option>
+                {factories.map((n) => (
+                  <option key={n}>{n}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <span>Date : </span>
+              <input
+                type="date"
+                value={form.productionDate}
+                onChange={(e) =>
+                  setForm({ ...form, productionDate: e.target.value })
+                }
+                className="p-2 border rounded col-span-2"
+                required
+              />
+            </div>
+            <div>
+              <span>Batch Number : </span>
+              <input
+                type="text"
+                placeholder="Batch Number"
+                value={form.batch}
+                onChange={(e) => setForm({ ...form, batch: e.target.value })}
+                className="p-2 border rounded"
+                required
+              />
+            </div>
           </div>
           <button
             type="submit"
