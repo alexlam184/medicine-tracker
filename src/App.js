@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { v4 as uuidv4 } from "uuid";
+import "./App.css";
 
 const roles = ["Manufacturer", "Distributor", "Pharmacy", "Patient"];
 
@@ -106,10 +107,11 @@ export default function App() {
     selectedMed?.blocks[selectedMed.blocks.length - 1]?.data.status ||
     "No medicine selected";
 
+  // Position nodes near top-left by reducing offsets
   const nodes = medicines.flatMap((med, i) =>
     med.blocks.map((block, idx) => {
-      const x = 50 * idx + 100;
-      const y = 40 * i + 100;
+      const x = 30 * idx + 10; // closer to left edge
+      const y = 30 * i + 10; // closer to top edge
       return {
         id: block.hash,
         label: `${block.data.role}\n${med.name} (${
@@ -170,8 +172,15 @@ export default function App() {
     });
   };
 
+  // Zoom and pan graph to fit nodes on mount and when nodes change
+  useEffect(() => {
+    if (fgRef.current && nodes.length > 0) {
+      fgRef.current.zoomToFit(400, 150); // padding 400, animation duration 400ms
+    }
+  }, [nodes]);
+
   return (
-    <div className="min-h-screen bg-gray-100 p-6 text-gray-800">
+    <div className="container">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Blockchain Medicine Tracking Demo
@@ -338,7 +347,7 @@ export default function App() {
           ))}
         </div>
 
-        <div className="mb-6 bg-white p-4 rounded shadow">
+        <div className="blockchain-graph">
           <h2 className="text-xl font-semibold mb-3">Blockchain Graph</h2>
           {nodes.length > 0 ? (
             <ForceGraph2D
